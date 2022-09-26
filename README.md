@@ -57,4 +57,4 @@ The improvment of the hummingbirds' policies is shown by the average cumulative 
 
 # Compete with the agent
 
-It's possible to play against the trained agent by puttinh 2 hummingbirds on one island and setting the behavior of one agent the Heuristic (having one human player controlling an agent with the keyboard). After training the agent achieves superhuman performance.
+It's possible to play against the trained agent by puttinh 2 hummingbirds on one island and setting the behavior of one agent to Heuristic (having one human player controlling an agent with the keyboard). After training the agent achieves superhuman performance.
