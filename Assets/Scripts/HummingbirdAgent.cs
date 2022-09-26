@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.MLAgents;
 using System;
 using Unity.MLAgents.Sensors;
+using Unity.MLAgents.Actuators;
 
 /// <summary>
 /// A hummingbird Machine Learning Agent
@@ -106,8 +107,9 @@ public class HummingbirdAgent : Agent
     /// Index 4 : yaw angle (+1 = turn right, -1 = turn left)
     /// </summary>
     /// <param name="vectorAction">The action to take</param>
-    public override void OnActionReceived(float[] vectorAction)
+    public override void OnActionReceived(ActionBuffers buffer)
     {
+        var vectorAction = buffer.ContinuousActions;
         //Don't take actions if frozen
         if (frozen) return;
 
@@ -177,7 +179,7 @@ public class HummingbirdAgent : Agent
     /// this function will be called. Its return values will be fed into <cref="OnActionReceived(float[])"/> insted of using the neural network
     /// </summary>
     /// <param name="actionsOut">zAn output action array</param>
-    public override void Heuristic(float[] actionsOut)
+    public override void Heuristic(in ActionBuffers buffer)
     {
         //Create placeholders for all movement/turning
         Vector3 forward = Vector3.zero;
@@ -209,6 +211,8 @@ public class HummingbirdAgent : Agent
 
         //Combine the movement and normalize
         Vector3 combined = (forward + left + up).normalized;
+
+        var actionsOut = buffer.ContinuousActions;
 
         //Add the 3 movement values, pitch and yaw to the actionsOut array
         actionsOut[0] = combined.x;
